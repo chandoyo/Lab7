@@ -16,3 +16,25 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 });
+
+
+const homePage = document.querySelector('h1');
+const settings = document.querySelector('img');
+
+// Pop state happens when back button is clicked
+window.addEventListener('popstate', (event) => {
+  router.setState(history.state, true); 
+});
+
+// When settings button is clicked
+settings.addEventListener("click", () => {
+  router.setState("settings", false);
+  //history.pushState({}, "settings", router.path);
+
+});
+
+// When home is clicked
+homePage.addEventListener("click", () => {
+  router.setState("home", false);
+
+});
