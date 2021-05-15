@@ -48,7 +48,7 @@ const settings = document.querySelector('img');
 
 // Pop state happens when back button is clicked
 window.addEventListener('popstate', (event) => {
-  router.setState(history.state, true); //?????
+  router.setState(history.state, true); 
 });
 
 // When settings button is clicked
