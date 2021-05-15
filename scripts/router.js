@@ -43,23 +43,44 @@ router.setState = function(state, pop) {
 
 
   // check each of these states, they might not be complete
-  if (state == 'home') {
+  if (state.page == 'home') {
     pageName.innerHTML = "Journal Entries";
     body.classList = null;
     if (pop == false) {
-      history.pushState({page: 'home'}, '', '/');
+      //history.pushState({page: 'home'}, '', '/');
+      history.pushState(state, '', '/');
     }
   }
-  else if (state == "settings") {
-    document.body.classList.remove("single-entry");
+  else if (state.page == "settings") {
+    body.classList.remove("single-entry"); // so that this doesn't show up when we move to the settings page
     pageName.innerHTML = "Settings";
     body.classList.add("settings");
 
     if (pop == false) {
-      history.pushState({page: 'settings'}, '', '/#settings');
+      history.pushState(state, '', '/#settings');
     }
    
   }
+  else if (state.page == 'entry') {
+    body.classList.add("single-entry");
+    body.classList.remove("settings"); //so that the grey settings stuff doesn't show up when we move back to an entry
+    pageName.innerHTML = "Entry " + state.number;
+
+
+    // clear previous data
+    document.querySelector('entry-page').remove();
+  
+    // Put the entry info on the page
+    let entryPage = document.createElement('entry-page');
+    body.appendChild(entryPage);
+    entryPage.entry = state.entry;
+
+    if (pop == false) {
+      history.pushState(state, '', '/#entry' + state.number);
+    }
+
+  }
+  
 
 
 

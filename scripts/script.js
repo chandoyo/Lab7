@@ -9,10 +9,23 @@ document.addEventListener('DOMContentLoaded', () => {
   fetch('https://cse110lab6.herokuapp.com/entries')
     .then(response => response.json())
     .then(entries => {
+
+      // to keep track of which entry
+      var numEntry = 1;
+
       entries.forEach(entry => {
         let newPost = document.createElement('journal-entry');
         newPost.entry = entry;
         document.querySelector('main').appendChild(newPost);
+
+        // When a specific entry is clicked
+        let displayNum = numEntry  // save the current entry number here
+        newPost.addEventListener('click', () => {
+          router.setState({page: 'entry', number: displayNum, entry: newPost.entry}, false);
+        });
+
+        // next
+        numEntry += 1;
       });
     });
 });
@@ -28,12 +41,12 @@ window.addEventListener('popstate', (event) => {
 
 // When settings button is clicked
 settings.addEventListener("click", () => {
-  router.setState("settings", false);
+  router.setState({page: "settings"}, false);
 
 });
 
 // When home is clicked
 homePage.addEventListener("click", () => {
-  router.setState("home", false);
+  router.setState({page: "home"}, false);
 
 });
