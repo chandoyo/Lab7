@@ -53,17 +53,12 @@ router.setState = function(state, pop) {
   else if (state == "settings") {
     document.body.classList.remove("single-entry");
     pageName.innerHTML = "Settings";
-  
-    //body.classList = null;
     body.classList.add("settings");
-    //body.classList.remove("single-entry");
-    //settings.className = "settings";
+
     if (pop == false) {
       history.pushState({page: 'settings'}, '', '/#settings');
     }
-    //settings.innerHTML = "Settings";
-    //settings.className = "settings";
-    //document.querySelector("body").className = "settings"
+   
   }
 
 
